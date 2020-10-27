@@ -2,7 +2,9 @@
 
 #1. Using the code from the lesson as a guide, create a dataframe named items that has all of the data for items.
 
+
 #2. Do the same thing, but for stores.
+
 
 #3. Extract the data for sales. There are a lot of pages of data here, so your code will need to be a little more complex. Your code should continue fetching data from the next page until all of the data is extracted.
 
