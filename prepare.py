@@ -1,15 +1,34 @@
-# Exercise
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from datetime import timedelta, datetime
 
-#1. Convert date column to datetime format.
+import warnings
+warnings.filterwarnings("ignore")
 
-#2. Plot the distribution of sale_amount and item_price.
+import acquire 
 
-#3. Set the index to be the datetime variable.
+######################### Prepare Store Data  ######################### 
 
-#4. Add a 'month' and 'day of week' column to your dataframe, derived from the index using the keywords for those date parts.
+def prep_store_data(df):
+    df.sale_date = pd.to_datetime(df.sale_date, format='%a, %d %b %Y %H:%M:%S %Z')
+    # make sure we sort by date/time before resampling or doing other time series manipulations
+    df = df.set_index('sale_date').sort_index()
+    df = df.rename(columns={'sale_amount': 'quantity'})
+    df['sales_total'] = df.quantity * df.item_price
+    return df
 
-#5. Add a column to your dataframe, sales_total, which is a derived from sale_amount (total items) and item_price.
+############### Prepare Open Power Systems Data for Germany  ############### 
 
-#6. Using pandas.DataFrame.diff() function, create a new column that is the result of the current sales - the previous days sales.
+def prep_opsd_data(df):
+    df.columns = [column.lower() for column in df]
+    df = df.rename(columns={'wind+solar': 'wind_and_solar'})
 
-#7. Make sure all the work that you have done above is reproducible. That is, you should put the code above into separate functions and be able to re-run the functions and get the same results.
+    df.date = pd.to_datetime(df.date)
+    df = df.set_index('date').sort_index()
+
+    df['month'] = df.index.month
+    df['year'] = df.index.year
+
+    df = df.fillna(0)
+    return df
