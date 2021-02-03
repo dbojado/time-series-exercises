@@ -1,7 +1,8 @@
 # Time Series Exercises
 
 ## Summary
-Time series analysis is about finding patterns in temporal data and making predictions, forecasting, based on those patterns.
+- Time series analysis is about finding patterns in temporal data and making predictions, forecasting, based on those patterns.
+- What should we expect to happen next? (Time Series Analysis)
 
 ## Common Use Cases
 - Sales & Revenue
